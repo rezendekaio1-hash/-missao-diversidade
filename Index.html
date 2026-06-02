@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missão Diversidade 🌈</title>
+<style id="fontes-sistema">
+:root {
+ --fonte-titulo: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ --fonte-corpo: 'Trebuchet MS', 'Arial', sans-serif;
+}
+</style>
+<style>
+:root {
+ --cor1: #FF6B6B;
+ --cor2: #FFD93D;
+ --cor3: #6BCB77;
+ --cor4: #4D96FF;
+ --cor5: #C77DFF;
+ --cor6: #FF9A3C;
+ --bg-escuro: #1a1a2e;
+ --bg-medio: #16213e;
+ --bg-card: #0f3460;
+ --branco: #FFFFFF;
+ --cinza-claro: #f0f4ff;
+ --sombra: 0 8px 32px rgba(0,0,0,0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+ font-family: 'Trebuchet MS', Arial, sans-serif;
+ background: var(--bg-escuro);
+ min-height: 100vh;
+ overflow-x: hidden;
+ color: var(--branco);
+}
+.tela {
+ display: none;
+ min-height: 100vh;
+ width: 100%;
+ animation: fadeIn 0.5s ease;
+}
+.tela.ativa { display: flex; flex-direction: column; }
+@keyframes fadeIn {
+ from { opacity: 0; transform: translateY(20px); }
+ to { opacity: 1; transform: translateY(0); }
+}
+.fundo-estrelas {
+ position: fixed; top: 0; left: 0;
+ width: 100%; height: 100%;
+ pointer-events: none; z-index: 0;
+ overflow: hidden;
+}
+.estrela {
+ position: absolute;
+ border-radius: 50%;
+ animation: flutuar linear infinite;
+ opacity: 0.6;
+}
+@keyframes flutuar {
+ 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+ 10% { opacity: 0.6; }
+ 90% { opacity: 0.6; }
+ 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+#tela-inicio {
+ background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ padding: 40px 20px;
+ position: relative;
+}
+.logo-area {
+ position: relative;
+ z-index: 1;
+ margin-bottom: 30px;
+}
+.mascote {
+ font-size: 100px;
+ display: block;
+ animation: pular 2s ease-in-out infinite;
+ filter: drop-shadow(0 0 20px rgba(255,200,0,0.5));
+}
+@keyframes pular {
+ 0%, 100% { transform: translateY(0) scale(1); }
+ 50% { transform: translateY(-15px) scale(1.05); }
+}
+.titulo-principal {
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-size: clamp(3rem, 8vw, 6rem);
+ font-weight: 800;
+ background: linear-gradient(135deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #C77DFF);
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ background-clip: text;
+ text-shadow: none;
+ line-height: 1;
+ margin-bottom: 10px;
+}
+.subtitulo {
+ font-size: clamp(1.1rem, 3vw, 1.5rem);
+ color: #a0b4d6;
+ font-weight: 600;
+ margin-bottom: 40px;
+}
+.arco-iris-bar {
+ height: 6px;
+ background: linear-gradient(90deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #C77DFF);
+ border-radius: 3px;
+ width: 200px;
+ margin: 0 auto 40px;
+ animation: brilhar 2s ease-in-out infinite;
+}
+@keyframes brilhar {
+ 0%, 100% { box-shadow: 0 0 10px rgba(255,200,0,0.3); }
+ 50% { box-shadow: 0 0 25px rgba(255,200,0,0.8); }
+}
+.input-nome {
+ display: flex;
+ flex-direction: column;
+ gap: 15px;
+ align-items: center;
+ margin-bottom: 30px;
+ z-index: 1;
+ position: relative;
+}
+.input-nome label {
+ font-size: 1.2rem;
+ font-weight: 700;
+ color: var(--cor2);
+}
+.input-nome input {
+ padding: 15px 25px;
+ border-radius: 50px;
+ border: 3px solid var(--cor4);
+ background: rgba(255,255,255,0.1);
+ color: white;
+ font-size: 1.2rem;
+ font-family: 'Trebuchet MS', Arial, sans-serif;
+ font-weight: 700;
+ text-align: center;
+ width: 320px;
+ max-width: 90vw;
+ outline: none;
+ transition: all 0.3s;
+ backdrop-filter: blur(10px);
+}
+.input-nome input::placeholder { color: rgba(255,255,255,0.4); }
+.input-nome input:focus {
+ border-color: var(--cor2);
+ box-shadow: 0 0 20px rgba(255,217,61,0.4);
+ transform: scale(1.02);
+}
+.btn {
+ padding: 18px 45px;
+ border: none;
+ border-radius: 50px;
+ font-size: 1.3rem;
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-weight: 700;
+ cursor: pointer;
+ transition: all 0.2s;
+ position: relative;
+ z-index: 1;
+ letter-spacing: 0.5px;
+}
+.btn:hover { transform: translateY(-3px) scale(1.03); }
+.btn:active { transform: translateY(0) scale(0.98); }
+.btn-primario {
+ background: linear-gradient(135deg, var(--cor3), var(--cor4));
+ color: white;
+ box-shadow: 0 6px 20px rgba(77,150,255,0.4);
+}
+.btn-primario:hover { box-shadow: 0 10px 30px rgba(77,150,255,0.6); }
+.btn-sim {
+ background: linear-gradient(135deg, #4CAF50, #2e7d32);
+ color: white;
+ box-shadow: 0 6px 20px rgba(76,175,80,0.4);
+ font-size: 1.4rem;
+ padding: 20px 50px;
+ min-width: 160px;
+}
+.btn-nao {
+ background: linear-gradient(135deg, #f44336, #b71c1c);
+ color: white;
+ box-shadow: 0 6px 20px rgba(244,67,54,0.4);
+ font-size: 1.4rem;
+ padding: 20px 50px;
+ min-width: 160px;
+}
+.faixas-coloridas {
+ display: flex;
+ gap: 8px;
+ justify-content: center;
+ margin-top: 30px;
+ z-index: 1;
+ position: relative;
+}
+.faixa { width: 40px; height: 12px; border-radius: 6px; }
+#tela-professor {
+ background: linear-gradient(135deg, #0d2137, #1a3a5c);
+ padding: 40px 30px;
+ align-items: center;
+ position: relative;
+}
+.professor-header {
+ display: flex;
+ align-items: center;
+ gap: 15px;
+ margin-bottom: 30px;
+ z-index: 1;
+}
+.professor-header .icone { font-size: 3rem; }
+.professor-header h2 {
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-size: 2rem;
+ color: var(--cor2);
+}
+.orientacoes-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+ gap: 20px;
+ max-width: 900px;
+ width: 100%;
+ z-index: 1;
+ margin-bottom: 30px;
+}
+.orientacao-card {
+ background: rgba(255,255,255,0.08);
+ border-radius: 20px;
+ padding: 25px;
+ border-left: 4px solid;
+ backdrop-filter: blur(10px);
+ transition: transform 0.2s;
+}
+.orientacao-card:hover { transform: translateY(-3px); }
+.orientacao-card .card-titulo {
+ font-size: 1.1rem;
+ font-weight: 800;
+ margin-bottom: 10px;
+ display: flex;
+ align-items: center;
+ gap: 8px;
+}
+.orientacao-card p { font-size: 0.95rem; color: #c0d0e8; line-height: 1.6; }
+#tela-fase {
+ background: linear-gradient(135deg, #1a1a2e, #16213e);
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ padding: 40px 20px;
+ position: relative;
+}
+.fase-anuncio { z-index: 1; }
+.fase-numero {
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-size: clamp(1rem, 3vw, 1.4rem);
+ text-transform: uppercase;
+ letter-spacing: 4px;
+ color: #a0b4d6;
+ margin-bottom: 10px;
+}
+.fase-nome {
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-size: clamp(2.5rem, 7vw, 5rem);
+ font-weight: 800;
+ margin-bottom: 20px;
+}
+.fase-descricao {
+ font-size: clamp(1rem, 2.5vw, 1.3rem);
+ color: #c0d0e8;
+ max-width: 600px;
+ margin: 0 auto 40px;
+ line-height: 1.6;
+}
+.fase-mascote { font-size: 80px; display: block; margin: 0 auto 30px; animation: pular 1.5s ease-in-out infinite; }
+#tela-pergunta {
+ background: linear-gradient(135deg, #1a1a2e, #16213e);
+ position: relative;
+}
+.header-jogo {
+ background: rgba(255,255,255,0.05);
+ padding: 15px 30px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ backdrop-filter: blur(10px);
+ border-bottom: 1px solid rgba(255,255,255,0.1);
+ z-index: 10;
+ position: relative;
+}
+.info-jogador { display: flex; align-items: center; gap: 12px; }
+.avatar-jogador { font-size: 2rem; }
+.nome-jogador { font-weight: 800; font-size: 1.1rem; color: var(--cor2); }
+.progresso-area {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 5px;
+ flex: 1;
+ padding: 0 20px;
+}
+.barra-progresso-container {
+ width: 100%;
+ max-width: 400px;
+ height: 12px;
+ background: rgba(255,255,255,0.1);
+ border-radius: 6px;
+ overflow: hidden;
+}
+.barra-progresso-fill {
+ height: 100%;
+ border-radius: 6px;
+ background: linear-gradient(90deg, var(--cor3), var(--cor4));
+ transition: width 0.5s ease;
+ box-shadow: 0 0 10px rgba(107,203,119,0.5);
+}
+.progresso-texto { font-size: 0.85rem; color: #a0b4d6; font-weight: 700; }
+.placar-area {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ background: rgba(255,217,61,0.15);
+ padding: 8px 18px;
+ border-radius: 50px;
+ border: 2px solid rgba(255,217,61,0.3);
+}
+.placar-icone { font-size: 1.4rem; }
+.placar-numero { font-size: 1.4rem; font-weight: 900; color: var(--cor2); }
+.conteudo-pergunta {
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ padding: 30px 20px;
+ z-index: 1;
+ position: relative;
+}
+.tag-fase {
+ display: inline-block;
+ padding: 6px 20px;
+ border-radius: 50px;
+ font-size: 0.85rem;
+ font-weight: 800;
+ text-transform: uppercase;
+ letter-spacing: 2px;
+ margin-bottom: 20px;
+}
+.numero-pergunta {
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-size: clamp(1rem, 2.5vw, 1.2rem);
+ color: #a0b4d6;
+ margin-bottom: 15px;
+ font-weight: 700;
+}
+.card-pergunta {
+ background: rgba(255,255,255,0.07);
+ border-radius: 25px;
+ padding: clamp(25px, 4vw, 45px);
+ max-width: 750px;
+ width: 100%;
+ margin-bottom: 30px;
+ border: 1px solid rgba(255,255,255,0.1);
+ backdrop-filter: blur(10px);
+ box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+ position: relative;
+ overflow: hidden;
+}
+.card-pergunta::before {
+ content: '';
+ position: absolute;
+ top: 0; left: 0; right: 0;
+ height: 4px;
+ background: linear-gradient(90deg, var(--cor1), var(--cor2), var(--cor3), var(--cor4), var(--cor5));
+}
+.emoji-pergunta {
+ font-size: clamp(3rem, 6vw, 5rem);
+ display: block;
+ margin: 0 auto 20px;
+ animation: balancear 2s ease-in-out infinite;
+}
+@keyframes balancear {
+ 0%, 100% { transform: rotate(-5deg); }
+ 50% { transform: rotate(5deg); }
+}
+.texto-pergunta {
+ font-size: clamp(1.2rem, 3vw, 1.7rem);
+ font-weight: 700;
+ line-height: 1.5;
+ text-align: center;
+ color: var(--branco);
+}
+.botoes-resposta {
+ display: flex;
+ gap: 25px;
+ justify-content: center;
+ flex-wrap: wrap;
+}
+.btn-resposta-sim, .btn-resposta-nao {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 8px;
+ padding: 20px 50px;
+ border: none;
+ border-radius: 20px;
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-size: 1.5rem;
+ font-weight: 800;
+ cursor: pointer;
+ transition: all 0.2s;
+ min-width: 160px;
+}
+.btn-resposta-sim {
+ background: linear-gradient(135deg, #4CAF50, #1b5e20);
+ color: white;
+ box-shadow: 0 8px 25px rgba(76,175,80,0.4);
+}
+.btn-resposta-nao {
+ background: linear-gradient(135deg, #f44336, #7f0000);
+ color: white;
+ box-shadow: 0 8px 25px rgba(244,67,54,0.4);
+}
+.btn-resposta-sim:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 35px rgba(76,175,80,0.6); }
+.btn-resposta-nao:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 35px rgba(244,67,54,0.6); }
+.btn-resposta-sim:active, .btn-resposta-nao:active { transform: translateY(0) scale(0.97); }
+.btn-icone { font-size: 2rem; display: block; }
+.overlay-feedback {
+ display: none;
+ position: fixed;
+ top: 0; left: 0; width: 100%; height: 100%;
+ z-index: 100;
+ align-items: center;
+ justify-content: center;
+ animation: fadeIn 0.3s ease;
+}
+.overlay-feedback.visivel { display: flex; }
+.feedback-correto { background: rgba(0, 80, 0, 0.92); }
+.feedback-incorreto { background: rgba(80, 0, 0, 0.92); }
+.feedback-box {
+ text-align: center;
+ padding: 50px 40px;
+ border-radius: 30px;
+ max-width: 600px;
+ width: 90%;
+ animation: aparecer 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+ border: 3px solid rgba(255,255,255,0.2);
+}
+@keyframes aparecer {
+ from { transform: scale(0.5); opacity: 0; }
+ to { transform: scale(1); opacity: 1; }
+}
+.feedback-correto .feedback-box { background: rgba(46, 125, 50, 0.95); }
+.feedback-incorreto .feedback-box { background: rgba(183, 28, 28, 0.95); }
+.feedback-emoji { font-size: 80px; display: block; margin-bottom: 15px; }
+.feedback-titulo { font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive; font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; }
+.feedback-explicacao { font-size: 1.1rem; line-height: 1.7; color: rgba(255,255,255,0.9); margin-bottom: 25px; max-width: 450px; margin-left: auto; margin-right: auto; }
+.feedback-pontos { font-size: 1.3rem; font-weight: 800; color: var(--cor2); margin-bottom: 25px; }
+#tela-resultado-fase {
+ background: linear-gradient(135deg, #1a1a2e, #0f3460);
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ padding: 40px 20px;
+ position: relative;
+}
+.resultado-card {
+ background: rgba(255,255,255,0.07);
+ border-radius: 30px;
+ padding: 50px 40px;
+ max-width: 600px;
+ width: 100%;
+ backdrop-filter: blur(15px);
+ border: 1px solid rgba(255,255,255,0.1);
+ box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+ z-index: 1;
+}
+.estrelas-ganhas { font-size: 3rem; display: block; margin-bottom: 15px; letter-spacing: 5px; }
+.resultado-fase-titulo { font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive; font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+.resultado-fase-sub { font-size: 1.1rem; color: #a0b4d6; margin-bottom: 25px; }
+.estatisticas {
+ display: flex;
+ gap: 20px;
+ justify-content: center;
+ margin-bottom: 30px;
+ flex-wrap: wrap;
+}
+.stat-item {
+ background: rgba(255,255,255,0.08);
+ padding: 15px 25px;
+ border-radius: 15px;
+ min-width: 110px;
+}
+.stat-numero { font-size: 2rem; font-weight: 900; display: block; }
+.stat-label { font-size: 0.8rem; color: #a0b4d6; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+#tela-final {
+ background: radial-gradient(ellipse at center, #0f3460 0%, #1a1a2e 70%);
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ padding: 30px 20px;
+ position: relative;
+}
+.troféu-area {
+ font-size: 100px;
+ display: block;
+ animation: girar 3s ease-in-out infinite;
+ z-index: 1;
+ filter: drop-shadow(0 0 30px rgba(255,200,0,0.7));
+ margin-bottom: 20px;
+}
+@keyframes girar {
+ 0%, 100% { transform: rotateY(0deg); }
+ 50% { transform: rotateY(180deg); }
+}
+.final-titulo {
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-size: clamp(2.5rem, 7vw, 5rem);
+ font-weight: 800;
+ background: linear-gradient(135deg, #FFD93D, #FF6B6B, #C77DFF);
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ background-clip: text;
+ margin-bottom: 10px;
+ z-index: 1;
+}
+.placar-final-box {
+ background: rgba(255,217,61,0.15);
+ border: 3px solid var(--cor2);
+ border-radius: 25px;
+ padding: 30px 50px;
+ margin: 20px 0;
+ z-index: 1;
+}
+.placar-final-numero {
+ font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+ font-size: clamp(3rem, 8vw, 6rem);
+ font-weight: 900;
+ color: var(--cor2);
+ display: block;
+ text-shadow: 0 0 30px rgba(255,217,61,0.6);
+}
+.placar-final-label { font-size: 1.1rem; color: #a0b4d6; font-weight: 700; }
+.mensagem-final { font-size: clamp(1rem, 2.5vw, 1.3rem); color: #c0d0e8; max-width: 500px; line-height: 1.7; margin: 15px 0 25px; z-index: 1; }
+.botoes-final {
+ display: flex;
+ gap: 15px;
+ flex-wrap: wrap;
+ justify-content: center;
+ z-index: 1;
+}
+.btn-secundario {
+ background: rgba(255,255,255,0.1);
+ color: white;
+ border: 2px solid rgba(255,255,255,0.3);
+ font-size: 1.1rem;
+ padding: 14px 35px;
+}
+.btn-secundario:hover { background: rgba(255,255,255,0.2); }
+#tela-certificado {
+ background: linear-gradient(135deg, #0d2137, #1a1a2e);
+ align-items: center;
+ justify-content: center;
+ padding: 30px 20px;
+}
+.certificado {
+ max-width: 750px;
+ width: 100%;
+ background: linear-gradient(135deg, #fffdf0, #fff8e1);
+ color: #1a1a2e;
+ border-radius: 20px;
+ padding: 50px 40px;
+ text-align: center;
+ position: relative;
+ box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+ border: 3px solid #ffc107;
+ overflow: hidden;
+}
+.certificado::before {
+ content: '';
+ position: absolute;
+ top: 10px; left: 10px; right: 10px; bottom: 10px;
+ border: 2px dashed #ffc107;
+ border-radius: 15px;
+ pointer-events: none;
+}
+.cert-escola { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: #666; font-weight: 700; margin-bottom: 10px; }
+.cert-titulo { font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive; font-size: 2.2rem; font-weight: 800; color: #1a1a2e; margin-bottom: 5px; }
+.cert-subtitulo { font-size: 1rem; color: #555; margin-bottom: 25px; }
+.cert-mascote { font-size: 60px; display: block; margin: 0 auto 20px; }
+.cert-texto { font-size: 1.1rem; color: #333; margin-bottom: 10px; }
+.cert-nome { font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive; font-size: 2.5rem; font-weight: 800; color: #0f3460; margin: 10px 0; border-bottom: 3px solid #ffc107; padding-bottom: 10px; display: inline-block; }
+.cert-conquista { font-size: 1rem; color: #555; margin: 10px 0 20px; }
+.cert-pontos { background: #0f3460; color: #ffc107; padding: 12px 30px; border-radius: 50px; font-size: 1.3rem; font-weight: 800; display: inline-block; margin-bottom: 25px; }
+.cert-medalhas { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+.cert-medalha { font-size: 2rem; }
+.cert-rodape {
+ display: flex;
+ justify-content: space-between;
+ align-items: flex-end;
+ margin-top: 20px;
+ padding-top: 20px;
+ border-top: 1px solid #e0d0a0;
+ font-size: 0.8rem;
+ color: #888;
+}
+.cert-logo { font-size: 1.5rem; font-weight: 800; color: #0f3460; }
+.cert-data { text-align: right; }
+.arco-iris-cert {
+ height: 8px;
+ background: linear-gradient(90deg, #FF6B6B, #FF9A3C, #FFD93D, #6BCB77, #4D96FF, #C77DFF);
+ margin-bottom: 25px;
+ border-radius: 4px;
+}
+.confete {
+ position: fixed;
+ width: 10px; height: 10px;
+ border-radius: 2px;
+ animation: cair linear forwards;
+ z-index: 200;
+ pointer-events: none;
+}
+@keyframes cair {
+ 0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+ 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.temporizador {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ justify-content: center;
+ margin: 0 0 20px;
+}
+.relogio-icone { font-size: 1.5rem; }
+.barra-tempo-container {
+ width: 200px; height: 12px;
+ background: rgba(255,255,255,0.1);
+ border-radius: 6px;
+ overflow: hidden;
+}
+.barra-tempo-fill {
+ height: 100%;
+ border-radius: 6px;
+ background: linear-gradient(90deg, var(--cor3), var(--cor2));
+ transition: width 0.1s linear;
+}
+.barra-tempo-fill.urgente { background: linear-gradient(90deg, #f44336, #ff9800); animation: piscar 0.5s infinite; }
+@keyframes piscar { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.tempo-numero { font-size: 1.1rem; font-weight: 900; min-width: 35px; color: var(--cor2); }
+#tela-orientacoes {
+ background: linear-gradient(135deg, #0d2137, #1a3a5c);
+ padding: 30px 20px;
+ align-items: center;
+ overflow-y: auto;
+}
+@media (max-width: 600px) {
+ .header-jogo { flex-wrap: wrap; gap: 10px; padding: 12px 15px; }
+ .progresso-area { order: 3; width: 100%; }
+ .botoes-resposta { gap: 15px; }
+ .btn-resposta-sim, .btn-resposta-nao { padding: 16px 35px; min-width: 130px; }
+ .estatisticas { gap: 10px; }
+ .cert-rodape { flex-direction: column; gap: 10px; align-items: center; }
+}
+.faixas-top, .faixas-bottom {
+ height: 8px;
+ background: linear-gradient(90deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #C77DFF, #FF6B6B);
+ flex-shrink: 0;
+}
+.conquista-popup {
+ display: none;
+ position: fixed;
+ top: 80px;
+ right: 20px;
+ background: linear-gradient(135deg, #0f3460, #1a1a2e);
+ border: 2px solid var(--cor2);
+ border-radius: 15px;
+ padding: 15px 25px;
+ z-index: 150;
+ animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+ max-width: 280px;
+ box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.conquista-popup.visivel { display: block; }
+@keyframes slideIn {
+ from { transform: translateX(100px); opacity: 0; }
+ to { transform: translateX(0); opacity: 1; }
+}
+.conquista-header { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+.conquista-icone { font-size: 1.8rem; }
+.conquista-titulo { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--cor2); font-weight: 800; }
+.conquista-nome { font-size: 1.1rem; font-weight: 700; }
+.conquista-desc { font-size: 0.85rem; color: #a0b4d6; }
+</style>
+</head>
+<body>
+
+<div class="fundo-estrelas" id="fundo-estrelas"></div>
+
+<div class="overlay-feedback" id="overlay-feedback">
+  <div class="feedback-box" id="feedback-box">
+    <span class="feedback-emoji" id="feedback-emoji">✅</span>
+    <div class="feedback-titulo" id="feedback-titulo">Muito bem!</div>
+    <div class="feedback-explicacao" id="feedback-explicacao"></div>
+    <div class="feedback-pontos" id="feedback-pontos">+10 pontos!</div>
+    <button class="btn btn-primario" onclick="proximaPergunta()">Próxima ➡️</button>
+  </div>
+</div>
+
+<div class="conquista-popup" id="conquista-popup">
+  <div class="conquista-header">
+    <span class="conquista-icone" id="conquista-icone">🏅</span>
+    <span class="conquista-titulo">Conquista desbloqueada!</span>
+  </div>
+  <div class="conquista-nome" id="conquista-nome"></div>
+  <div class="conquista-desc" id="conquista-desc"></div>
+</div>
+
+<!-- TELA INÍCIO -->
+<div class="tela ativa" id="tela-inicio">
+  <div class="faixas-top"></div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;">
+    <div class="logo-area">
+      <span class="mascote">🌍</span>
+      <h1 class="titulo-principal">Missão Diversidade</h1>
+      <p class="subtitulo">🎮 O Jogo Educacional da Inclusão</p>
+      <div class="arco-iris-bar"></div>
+    </div>
+    <div class="input-nome">
+      <label>✏️ Qual é o seu nome?</label>
+      <input type="text" id="input-nome-aluno" placeholder="Digite seu nome aqui..." maxlength="30">
+    </div>
+    <button class="btn btn-primario" onclick="iniciarJogo()" style="font-size:1.4rem;padding:20px 60px;margin-bottom:20px;">
+      🚀 Começar Aventura!
+    </button>
+    <button class="btn btn-secundario" onclick="mostrarOrientacoes()" style="font-size:1rem;padding:12px 30px;">
+      📋 Orientações para Professores
+    </button>
+    <div class="faixas-coloridas">
+      <div class="faixa" style="background:var(--cor1)"></div>
+      <div class="faixa" style="background:var(--cor6)"></div>
+      <div class="faixa" style="background:var(--cor2)"></div>
+      <div class="faixa" style="background:var(--cor3)"></div>
+      <div class="faixa" style="background:var(--cor4)"></div>
+      <div class="faixa" style="background:var(--cor5)"></div>
+    </div>
+  </div>
+  <div class="faixas-bottom"></div>
+</div>
+
+<!-- TELA ORIENTAÇÕES PROFESSOR -->
+<div class="tela" id="tela-orientacoes">
+  <div class="faixas-top"></div>
+  <div style="max-width:900px;width:100%;z-index:1;padding:20px;">
+    <div class="professor-header">
+      <span class="icone">📋</span>
+      <h2>Orientações Pedagógicas</h2>
+    </div>
+    <div class="orientacoes-grid">
+      <div class="orientacao-card" style="border-color:#4D96FF">
+        <div class="card-titulo" style="color:#4D96FF">🎯 Objetivo do Jogo</div>
+        <p>Desenvolver empatia, pensamento crítico e consciência sobre diversidade e inclusão de forma lúdica. As perguntas estimulam reflexão sobre respeito, diferenças e convivência saudável.</p>
+      </div>
+      <div class="orientacao-card" style="border-color:#6BCB77">
+        <div class="card-titulo" style="color:#6BCB77">👶 Faixa Etária</div>
+        <p>Adaptado para crianças de 5 a 15 anos. As fases estão organizadas por tema, com linguagem acessível e gradualmente mais reflexiva para turmas do Ensino Fundamental.</p>
+      </div>
+      <div class="orientacao-card" style="border-color:#FFD93D">
+        <div class="card-titulo" style="color:#FFD93D">🖥️ Como Usar em Sala</div>
+        <p>Projete no telão ou smartboard. Pode ser jogado individualmente, em duplas ou com a turma toda votando em conjunto. Recomenda-se debater cada pergunta após a resposta.</p>
+      </div>
+      <div class="orientacao-card" style="border-color:#FF6B6B">
+        <div class="card-titulo" style="color:#FF6B6B">💬 Dicas de Mediação</div>
+        <p>Após cada pergunta, pergunte à turma: "Você já viveu algo assim?" ou "Como podemos agir diferente?". Use as explicações do jogo como ponto de partida para discussão.</p>
+      </div>
+      <div class="orientacao-card" style="border-color:#C77DFF">
+        <div class="card-titulo" style="color:#C77DFF">📚 Temas Abordados</div>
+        <p>🌍 Respeito às Diferenças • 💙 Empatia e Cuidado • 🏫 Inclusão Escolar • ⚖️ Direitos e Deveres • 🌈 Diversidade Cultural</p>
+      </div>
+      <div class="orientacao-card" style="border-color:#FF9A3C">
+        <div class="card-titulo" style="color:#FF9A3C">⏱️ Tempo de Jogo</div>
+        <p>Cada fase tem 4 perguntas com 20 segundos de tempo. O jogo completo (5 fases, 20 perguntas) dura aproximadamente 20-30 minutos incluindo os debates em sala.</p>
+      </div>
+    </div>
+    <div style="text-align:center;z-index:1">
+      <button class="btn btn-primario" onclick="voltarInicio()">⬅️ Voltar ao Início</button>
+    </div>
+  </div>
+  <div class="faixas-bottom"></div>
+</div>
+
+<!-- TELA FASE -->
+<div class="tela" id="tela-fase">
+  <div class="faixas-top"></div>
+  <div class="fase-anuncio" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;">
+    <span class="fase-mascote" id="fase-emoji">🌍</span>
+    <div class="fase-numero" id="fase-numero">FASE 1 DE 5</div>
+    <div class="fase-nome" id="fase-nome" style="color:var(--cor4)">Respeito às Diferenças</div>
+    <div class="fase-descricao" id="fase-descricao">Cada pessoa é única e especial. Vamos aprender sobre respeito!</div>
+    <button class="btn btn-primario" onclick="iniciarFase()" style="font-size:1.3rem;padding:18px 50px;">
+      ▶️ Vamos lá!
+    </button>
+  </div>
+  <div class="faixas-bottom"></div>
+</div>
+
+<!-- TELA PERGUNTA -->
+<div class="tela" id="tela-pergunta">
+  <div class="faixas-top"></div>
+  <div class="header-jogo">
+    <div class="info-jogador">
+      <span class="avatar-jogador">🌟</span>
+      <span class="nome-jogador" id="nome-display">Aluno</span>
+    </div>
+    <div class="progresso-area">
+      <div class="barra-progresso-container">
+        <div class="barra-progresso-fill" id="barra-progresso" style="width:0%"></div>
+      </div>
+      <div class="progresso-texto" id="progresso-texto">Pergunta 1 de 20</div>
+    </div>
+    <div class="placar-area">
+      <span class="placar-icone">⭐</span>
+      <span class="placar-numero" id="placar-display">0</span>
+    </div>
+  </div>
+  <div class="conteudo-pergunta">
+    <div class="tag-fase" id="tag-fase" style="background:rgba(77,150,255,0.2);color:#4D96FF;">
+      🌍 Fase 1
+    </div>
+    <div class="temporizador">
+      <span class="relogio-icone">⏱️</span>
+      <div class="barra-tempo-container">
+        <div class="barra-tempo-fill" id="barra-tempo" style="width:100%"></div>
+      </div>
+      <span class="tempo-numero" id="tempo-numero">20</span>
+    </div>
+    <div class="numero-pergunta" id="numero-pergunta">Pergunta 1</div>
+    <div class="card-pergunta">
+      <span class="emoji-pergunta" id="emoji-pergunta">🤔</span>
+      <div class="texto-pergunta" id="texto-pergunta">Carregando pergunta...</div>
+    </div>
+    <div class="botoes-resposta">
+      <button class="btn-resposta-sim" onclick="responder(true)">
+        <span class="btn-icone">✅</span>
+        SIM
+      </button>
+      <button class="btn-resposta-nao" onclick="responder(false)">
+        <span class="btn-icone">❌</span>
+        NÃO
+      </button>
+    </div>
+  </div>
+  <div class="faixas-bottom"></div>
+</div>
+
+<!-- TELA RESULTADO FASE -->
+<div class="tela" id="tela-resultado-fase">
+  <div class="faixas-top"></div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;">
+    <div class="resultado-card">
+      <span class="estrelas-ganhas" id="estrelas-ganhas">⭐⭐⭐</span>
+      <div class="resultado-fase-titulo" id="resultado-fase-titulo">Fase Concluída! 🎉</div>
+      <div class="resultado-fase-sub" id="resultado-fase-sub">Você completou a Fase 1</div>
+      <div class="estatisticas">
+        <div class="stat-item">
+          <span class="stat-numero" id="stat-acertos" style="color:var(--cor3)">4</span>
+          <span class="stat-label">Acertos</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-numero" id="stat-erros" style="color:var(--cor1)">0</span>
+          <span class="stat-label">Erros</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-numero" id="stat-pontos-fase" style="color:var(--cor2)">40</span>
+          <span class="stat-label">Pontos</span>
+        </div>
+      </div>
+      <div style="margin-bottom:25px;font-size:1rem;color:#a0b4d6;font-weight:700" id="msg-fase"></div>
+      <button class="btn btn-primario" id="btn-proxima-fase" onclick="proximaFase()" style="font-size:1.2rem;padding:16px 45px;">
+        Próxima Fase ➡️
+      </button>
+    </div>
+  </div>
+  <div class="faixas-bottom"></div>
+</div>
+
+<!-- TELA FINAL -->
+<div class="tela" id="tela-final">
+  <div class="faixas-top"></div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;z-index:1;">
+    <span class="troféu-area">🏆</span>
+    <div class="final-titulo">Missão Concluída!</div>
+    <div class="placar-final-box">
+      <span class="placar-final-numero" id="placar-final">0</span>
+      <div class="placar-final-label">⭐ Pontos conquistados</div>
+    </div>
+    <div class="mensagem-final" id="mensagem-final">
+      Parabéns! Você completou todas as fases da Missão Diversidade!
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:25px;z-index:1" id="medalhas-finais"></div>
+    <div class="botoes-final">
+      <button class="btn btn-primario" onclick="mostrarCertificado()" style="font-size:1.2rem;padding:16px 40px;">
+        🏅 Ver Certificado
+      </button>
+      <button class="btn btn-secundario" onclick="reiniciarJogo()">
+        🔄 Jogar Novamente
+      </button>
+    </div>
+  </div>
+  <div class="faixas-bottom"></div>
+</div>
+
+<!-- TELA CERTIFICADO -->
+<div class="tela" id="tela-certificado">
+  <div class="faixas-top"></div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:1;width:100%;">
+    <div class="certificado" id="certificado-conteudo">
+      <div class="arco-iris-cert"></div>
+      <div class="cert-escola">Escola Municipal — Educação para a Vida</div>
+      <div class="cert-titulo">🌟 Certificado de Conclusão 🌟</div>
+      <div class="cert-subtitulo">Programa de Educação para a Diversidade e Inclusão</div>
+      <span class="cert-mascote">🌍</span>
+      <div class="cert-texto">Certificamos que</div>
+      <div class="cert-nome" id="cert-nome-aluno">Aluno</div>
+      <div class="cert-conquista">concluiu com sucesso todas as fases do jogo educacional</div>
+      <div style="font-size:1.4rem;font-weight:800;color:#0f3460;margin:5px 0 15px;">
+        🌈 Missão Diversidade
+      </div>
+      <div class="cert-pontos" id="cert-pontos">⭐ 0 pontos</div>
+      <div class="cert-medalhas" id="cert-medalhas"></div>
+      <div style="font-size:0.9rem;color:#555;line-height:1.6;max-width:500px;margin:0 auto 20px;">
+        Demonstrou conhecimento e sensibilidade sobre respeito às diferenças, empatia, inclusão escolar, direitos humanos e valorização da diversidade cultural.
+      </div>
+      <div class="cert-rodape">
+        <div class="cert-logo">🌍 Missão Diversidade</div>
+        <div class="cert-data" id="cert-data"></div>
+      </div>
+      <div class="arco-iris-cert" style="margin-top:25px;margin-bottom:0"></div>
+    </div>
+    <div style="display:flex;gap:15px;margin-top:20px;flex-wrap:wrap;justify-content:center;">
+      <button class="btn btn-primario" onclick="imprimirCertificado()">🖨️ Imprimir Certificado</button>
+      <button class="btn btn-secundario" onclick="voltarFinal()">⬅️ Voltar</button>
+    </div>
+  </div>
+  <div class="faixas-bottom"></div>
+</div>
+
+<script>
+const FASES = [
+  { numero:1, nome:"Respeito às Diferenças", descricao:"Cada pessoa é única e especial. Vamos aprender sobre respeito às diferenças!", emoji:"🌍", cor:"var(--cor4)", tag:"🌍 Respeito", tagBg:"rgba(77,150,255,0.2)", tagCor:"#4D96FF" },
+  { numero:2, nome:"Empatia e Cuidado", descricao:"Empatia é se colocar no lugar do outro. Que tal exercitar isso?", emoji:"💙", cor:"var(--cor1)", tag:"💙 Empatia", tagBg:"rgba(255,107,107,0.2)", tagCor:"#FF6B6B" },
+  { numero:3, nome:"Inclusão na Escola", descricao:"A escola é de todos! Vamos pensar em como incluir e acolher cada um.", emoji:"🏫", cor:"var(--cor3)", tag:"🏫 Inclusão", tagBg:"rgba(107,203,119,0.2)", tagCor:"#6BCB77" },
+  { numero:4, nome:"Direitos e Igualdade", descricao:"Todo mundo tem direitos iguais. Vamos conhecê-los!", emoji:"⚖️", cor:"var(--cor2)", tag:"⚖️ Direitos", tagBg:"rgba(255,217,61,0.2)", tagCor:"#FFD93D" },
+  { numero:5, nome:"Diversidade Cultural", descricao:"Nossa turma é rica em culturas, histórias e tradições. Vamos celebrar!", emoji:"🌈", cor:"var(--cor5)", tag:"🌈 Cultura", tagBg:"rgba(199,125,255,0.2)", tagCor:"#C77DFF" }
+];
+
+const PERGUNTAS = [
+  { fase:0, emoji:"👓", texto:"Está certo gozar de um colega que usa óculos ou aparelho?", resposta:false, explicacao:"Não! Gozar de características físicas é bullying e machuca muito. Todos merecem respeito, independente de como são fisicamente. 💙" },
+  { fase:0, emoji:"♿", texto:"Pessoas com deficiência podem aprender, brincar e conviver junto com todos?", resposta:true, explicacao:"Sim! Toda pessoa tem capacidade de aprender e participar. Precisamos criar espaços acessíveis e acolhedores para todos! 🌟" },
+  { fase:0, emoji:"🤝", texto:"Ter amigos que são diferentes de você pode te fazer crescer como pessoa?", resposta:true, explicacao:"Com certeza! Quando convivemos com pessoas diferentes, aprendemos coisas novas, desenvolvemos empatia e enriquecemos nossa visão de mundo! 🌍" },
+  { fase:0, emoji:"✂️", texto:"Está certo excluir alguém de um grupo por causa do cabelo, da cor da pele ou do jeito de se vestir?", resposta:false, explicacao:"Não! Excluir alguém por sua aparência é discriminação. Nossa diversidade é nossa riqueza — cada um do jeito que é! 🌈" },
+  { fase:1, emoji:"😢", texto:"Se um colega está triste e chorando, você deve se aproximar e perguntar se está tudo bem?", resposta:true, explicacao:"Sim! Um gesto de carinho faz toda a diferença. Mostrar que você se importa já é um ato de amor e empatia! 💙" },
+  { fase:1, emoji:"🤔", texto:"É possível entender como a outra pessoa se sente mesmo sem ter passado pela mesma situação?", resposta:true, explicacao:"Sim! Isso se chama empatia — tentar imaginar o que o outro sente. Não precisamos viver o mesmo para cuidar! 🌟" },
+  { fase:1, emoji:"😤", texto:"Quando alguém faz algo errado com você, a melhor solução sempre é se vingar?", resposta:false, explicacao:"Não! A vingança só cria mais conflito. O melhor é conversar, pedir ajuda de um adulto e buscar resolver com diálogo e respeito! 🕊️" },
+  { fase:1, emoji:"🤲", texto:"Parar o que estamos fazendo para ajudar alguém que precisa é um sinal de generosidade?", resposta:true, explicacao:"Sim! Generosidade é um valor incrível. Quando ajudamos, criamos um mundo mais bonito e fazemos alguém se sentir amado! ❤️" },
+  { fase:2, emoji:"♿", texto:"A escola deve ter rampas e outros recursos para que alunos com deficiência possam participar de tudo?", resposta:true, explicacao:"Sim! A acessibilidade é um direito. Toda escola deve garantir que TODOS os alunos possam participar plenamente! ♿🏫" },
+  { fase:2, emoji:"🆕", texto:"Quando um colega novo chega na turma, ignorá-lo é a melhor forma de agir?", resposta:false, explicacao:"Não! O ideal é se apresentar, convidá-lo para brincar e fazer com que ele se sinta bem-vindo. Acolher é um ato de amor! 😊" },
+  { fase:2, emoji:"📚", texto:"Alunos que precisam de mais tempo para aprender devem receber apoio especial na escola?", resposta:true, explicacao:"Sim! Cada criança aprende de um jeito e no seu tempo. A escola inclusiva respeita esses ritmos e oferece suporte para todos! 🌟" },
+  { fase:2, emoji:"📱", texto:"Falar mal de um colega nas redes sociais é tão sério quanto falar mal na escola?", resposta:true, explicacao:"Sim! O cyberbullying é tão prejudicial quanto o bullying presencial e pode ser ainda mais difícil de escapar. Respeito vale em todo lugar! ❤️" },
+  { fase:3, emoji:"👧👦", texto:"Meninas e meninos têm os mesmos direitos dentro da escola?", resposta:true, explicacao:"Sim! A igualdade de gênero garante que todos tenham as mesmas oportunidades de aprender, brincar e crescer! ⚖️🌟" },
+  { fase:3, emoji:"👊", texto:"Se um colega está sofrendo bullying, você deve fingir que não viu para não se meter em problema?", resposta:false, explicacao:"Não! Ser testemunha e não agir também é uma forma de participar do bullying. Diga a um adulto de confiança — isso é coragem! 💪" },
+  { fase:3, emoji:"🏠", texto:"Toda criança tem o direito de ter moradia, saúde, educação e alimentação garantidos?", resposta:true, explicacao:"Sim! Esses são direitos fundamentais previstos no Estatuto da Criança e do Adolescente (ECA). Toda criança merece esses cuidados! 🏅" },
+  { fase:3, emoji:"😶", texto:"Se um adulto faz algo que te deixa desconfortável, você deve guardar segredo para não criar problema?", resposta:false, explicacao:"Não! Nunca guarde segredos que te machucam. Fale com um adulto de confiança — seus pais, professores ou ligue 100 (Disque Direitos Humanos)! 🆘" },
+  { fase:4, emoji:"🍜", texto:"Experimentar comidas, músicas e costumes de outras culturas nos torna mais ricos?", resposta:true, explicacao:"Sim! Conhecer outras culturas expande nosso mundo, nossa empatia e nossa criatividade. A diversidade nos enriquece! 🌍✨" },
+  { fase:4, emoji:"🙏", texto:"Zombar da religião ou tradição de outra pessoa é aceitável se você acha engraçado?", resposta:false, explicacao:"Não! Liberdade religiosa é um direito humano. Cada pessoa pode acreditar no que quiser. Respeitar é obrigatório! 🌟" },
+  { fase:4, emoji:"🌎", texto:"Brasileiros de diferentes regiões podem ter sotaques, costumes e tradições muito distintos?", resposta:true, explicacao:"Sim! O Brasil é um país enorme e diverso. De Norte a Sul, cada região tem sua cultura única — e isso é maravilhoso! 🇧🇷" },
+  { fase:4, emoji:"🤝", texto:"Uma turma diversa — com alunos de diferentes origens, crenças e jeitos de ser — é mais criativa e forte?", resposta:true, explicacao:"Sim! A diversidade traz diferentes perspectivas e soluções. Quando unimos diferenças com respeito, somos muito mais poderosos! 💪🌈" }
+];
+
+const CONQUISTAS = [
+  { icone:"🌟", nome:"Primeira Resposta!", desc:"Respondeu sua primeira pergunta", pontos:0 },
+  { icone:"🔥", nome:"Em Chamas!", desc:"5 acertos seguidos", pontos:5 },
+  { icone:"🏆", nome:"Fase Perfeita!", desc:"Acertou todas as perguntas de uma fase", pontos:4 },
+  { icone:"🏅", nome:"Campeão da Diversidade!", desc:"Completou todas as fases", pontos:20 },
+  { icone:"⚡", nome:"Relâmpago!", desc:"Respondeu em menos de 5 segundos", pontos:0 },
+];
+
+let estado = {
+  nomeAluno: "", faseAtual: 0, perguntaAtualNaFase: 0, perguntaGlobal: 0,
+  pontos: 0, acertosNaFase: 0, errosNaFase: 0, pontosFase: 0,
+  acertosSeguidosAtual: 0, conquistasDesbloqueadas: [], primeiraResposta: true,
+  temporizador: null, tempoRestante: 20,
+};
+
+function criarFundoAnimado() {
+  const fundo = document.getElementById('fundo-estrelas');
+  const emojis = ['✨','⭐','🌟','💫','🎯','💙','🌈'];
+  for (let i = 0; i < 15; i++) {
+    const e = document.createElement('div');
+    e.className = 'estrela';
+    const size = 16 + Math.random() * 20;
+    const delay = Math.random() * 15;
+    const dur = 8 + Math.random() * 12;
+    const left = Math.random() * 100;
+    e.style.cssText = `left:${left}%;width:${size}px;height:${size}px;animation-delay:${delay}s;animation-duration:${dur}s;font-size:${size}px;background:transparent;`;
+    e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    fundo.appendChild(e);
+  }
+}
+
+function mostrarTela(id) {
+  document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
+  document.getElementById(id).classList.add('ativa');
+}
+
+function voltarInicio() { mostrarTela('tela-inicio'); }
+function mostrarOrientacoes() { mostrarTela('tela-orientacoes'); }
+
+function iniciarJogo() {
+  const nome = document.getElementById('input-nome-aluno').value.trim();
+  estado.nomeAluno = nome || 'Aventureiro';
+  document.getElementById('nome-display').textContent = estado.nomeAluno;
+  estado.faseAtual = 0; estado.perguntaGlobal = 0; estado.pontos = 0;
+  estado.conquistasDesbloqueadas = []; estado.primeiraResposta = true;
+  mostrarAnuncioFase();
+}
+
+function mostrarAnuncioFase() {
+  const fase = FASES[estado.faseAtual];
+  document.getElementById('fase-numero').textContent = `FASE ${estado.faseAtual + 1} DE ${FASES.length}`;
+  document.getElementById('fase-nome').textContent = fase.nome;
+  document.getElementById('fase-nome').style.color = fase.cor;
+  document.getElementById('fase-descricao').textContent = fase.descricao;
+  document.getElementById('fase-emoji').textContent = fase.emoji;
+  mostrarTela('tela-fase');
+}
+
+function iniciarFase() {
+  estado.perguntaAtualNaFase = 0; estado.acertosNaFase = 0;
+  estado.errosNaFase = 0; estado.pontosFase = 0;
+  mostrarPergunta();
+}
+
+function getPerguntasFase(fase) { return PERGUNTAS.filter(p => p.fase === fase); }
+
+function mostrarPergunta() {
+  const perguntasFase = getPerguntasFase(estado.faseAtual);
+  const pergunta = perguntasFase[estado.perguntaAtualNaFase];
+  const fase = FASES[estado.faseAtual];
+  const perguntaGlobal = estado.perguntaGlobal + 1;
+  document.getElementById('tag-fase').textContent = fase.tag;
+  document.getElementById('tag-fase').style.background = fase.tagBg;
+  document.getElementById('tag-fase').style.color = fase.tagCor;
+  document.getElementById('numero-pergunta').textContent = `Pergunta ${estado.perguntaAtualNaFase + 1} de ${perguntasFase.length}`;
+  document.getElementById('emoji-pergunta').textContent = pergunta.emoji;
+  document.getElementById('texto-pergunta').textContent = pergunta.texto;
+  document.getElementById('placar-display').textContent = estado.pontos;
+  const pct = ((perguntaGlobal - 1) / PERGUNTAS.length) * 100;
+  document.getElementById('barra-progresso').style.width = pct + '%';
+  document.getElementById('progresso-texto').textContent = `Pergunta ${perguntaGlobal} de ${PERGUNTAS.length}`;
+  iniciarTemporizador();
+  mostrarTela('tela-pergunta');
+}
+
+function iniciarTemporizador() {
+  pararTemporizador();
+  estado.tempoRestante = 20;
+  atualizarBarraTempo();
+  estado.temporizador = setInterval(() => {
+    estado.tempoRestante -= 0.1;
+    if (estado.tempoRestante <= 0) {
+      estado.tempoRestante = 0;
+      pararTemporizador();
+      responder(null);
+    }
+    atualizarBarraTempo();
+  }, 100);
+}
+
+function pararTemporizador() {
+  if (estado.temporizador) { clearInterval(estado.temporizador); estado.temporizador = null; }
+}
+
+function atualizarBarraTempo() {
+  const pct = (estado.tempoRestante / 20) * 100;
+  const barra = document.getElementById('barra-tempo');
+  document.getElementById('tempo-numero').textContent = Math.ceil(estado.tempoRestante);
+  barra.style.width = pct + '%';
+  if (estado.tempoRestante <= 5) barra.classList.add('urgente');
+  else barra.classList.remove('urgente');
+}
+
+function responder(respostaUsuario) {
+  pararTemporizador();
+  const perguntasFase = getPerguntasFase(estado.faseAtual);
+  const pergunta = perguntasFase[estado.perguntaAtualNaFase];
+  const tempoUsado = 20 - estado.tempoRestante;
+  let correto = false, pontos = 0, titulo = '', emoji = '';
+  if (respostaUsuario === null) {
+    correto = false; titulo = 'Tempo Esgotado! ⏰'; emoji = '⏱️'; pontos = 0;
+  } else {
+    correto = (respostaUsuario === pergunta.resposta);
+    if (correto) {
+      pontos = 10;
+      if (tempoUsado < 5) pontos = 15;
+      titulo = 'Muito bem! 🎉'; emoji = '⭐';
+      estado.acertosSeguidosAtual++;
+      estado.acertosNaFase++;
+      if (estado.primeiraResposta) { desbloquearConquista(0); estado.primeiraResposta = false; }
+      if (tempoUsado < 5) desbloquearConquista(4);
+      if (estado.acertosSeguidosAtual >= 5) desbloquearConquista(1);
+    } else {
+      titulo = 'Quase lá! 💪'; emoji = '🤔';
+      estado.acertosSeguidosAtual = 0; estado.errosNaFase++;
+    }
+  }
+  estado.pontos += pontos; estado.pontosFase += pontos;
+  document.getElementById('placar-display').textContent = estado.pontos;
+  const overlay = document.getElementById('overlay-feedback');
+  overlay.className = 'overlay-feedback visivel ' + (correto ? 'feedback-correto' : 'feedback-incorreto');
+  document.getElementById('feedback-emoji').textContent = emoji;
+  document.getElementById('feedback-titulo').textContent = titulo;
+  document.getElementById('feedback-explicacao').textContent = pergunta.explicacao;
+  document.getElementById('feedback-pontos').textContent = correto ? `+${pontos} pontos! ⭐` : 'Sem pontos desta vez — mas você aprendeu algo novo!';
+  const btnFeedback = overlay.querySelector('button');
+  const isUltima = estado.perguntaAtualNaFase >= perguntasFase.length - 1;
+  btnFeedback.textContent = isUltima ? 'Ver Resultado da Fase ➡️' : 'Próxima Pergunta ➡️';
+}
+
+function proximaPergunta() {
+  document.getElementById('overlay-feedback').classList.remove('visivel');
+  const perguntasFase = getPerguntasFase(estado.faseAtual);
+  estado.perguntaGlobal++; estado.perguntaAtualNaFase++;
+  if (estado.perguntaAtualNaFase >= perguntasFase.length) {
+    if (estado.acertosNaFase === perguntasFase.length) desbloquearConquista(2);
+    mostrarResultadoFase();
+  } else { mostrarPergunta(); }
+}
+
+function mostrarResultadoFase() {
+  const perguntasFase = getPerguntasFase(estado.faseAtual);
+  const fase = FASES[estado.faseAtual];
+  const total = perguntasFase.length;
+  const pct = estado.acertosNaFase / total;
+  let estrelas = pct===1 ? '⭐⭐⭐' : pct>=0.75 ? '⭐⭐✨' : pct>=0.5 ? '⭐✨✨' : '✨✨✨';
+  let msg = pct===1 ? '🏆 Fase Perfeita! Incrível!' : pct>=0.75 ? '🌟 Muito bem! Continue assim!' : pct>=0.5 ? '👍 Bom trabalho! Você está aprendendo!' : '💪 Não desista! Cada erro é uma lição!';
+  document.getElementById('estrelas-ganhas').textContent = estrelas;
+  document.getElementById('resultado-fase-titulo').textContent = `${fase.emoji} ${fase.nome}`;
+  document.getElementById('resultado-fase-sub').textContent = `Fase ${estado.faseAtual + 1} concluída!`;
+  document.getElementById('stat-acertos').textContent = estado.acertosNaFase;
+  document.getElementById('stat-erros').textContent = estado.errosNaFase;
+  document.getElementById('stat-pontos-fase').textContent = estado.pontosFase;
+  document.getElementById('msg-fase').textContent = msg;
+  const btnProx = document.getElementById('btn-proxima-fase');
+  btnProx.textContent = estado.faseAtual >= FASES.length - 1 ? '🏆 Ver Resultado Final!' : `Próxima Fase: ${FASES[estado.faseAtual + 1].nome} ➡️`;
+  mostrarTela('tela-resultado-fase');
+  if (estado.acertosNaFase === total) lancarConfetes();
+}
+
+function proximaFase() {
+  estado.faseAtual++;
+  if (estado.faseAtual >= FASES.length) { desbloquearConquista(3); mostrarResultadoFinal(); }
+  else mostrarAnuncioFase();
+}
+
+function mostrarResultadoFinal() {
+  const pct = estado.pontos / (PERGUNTAS.length * 10);
+  let mensagem = pct>=0.9 ? '🏆 Você é um verdadeiro Guardião da Diversidade! Seu respeito e empatia inspiram todos ao seu redor! 🌈'
+    : pct>=0.7 ? '🌟 Parabéns! Você mostrou que a diversidade é um valor que você leva no coração! Continue aprendendo! 💙'
+    : pct>=0.5 ? '👍 Bom trabalho! Você está no caminho certo para se tornar um campeão da inclusão! Continue! 💪'
+    : '💡 Cada jornada começa com um primeiro passo. Você aprendeu muito! Experimente jogar novamente! 🌱';
+  document.getElementById('placar-final').textContent = estado.pontos;
+  document.getElementById('mensagem-final').textContent = mensagem;
+  document.getElementById('medalhas-finais').innerHTML = estado.conquistasDesbloqueadas.map(i =>
+    `<span title="${CONQUISTAS[i].nome}" style="font-size:2.5rem;cursor:default">${CONQUISTAS[i].icone}</span>`).join('');
+  mostrarTela('tela-final');
+  lancarConfetes();
+}
+
+function mostrarCertificado() {
+  const agora = new Date();
+  const data = agora.toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });
+  document.getElementById('cert-nome-aluno').textContent = estado.nomeAluno;
+  document.getElementById('cert-pontos').textContent = `⭐ ${estado.pontos} pontos conquistados`;
+  document.getElementById('cert-data').innerHTML = `Data: ${data}<br>Missão Diversidade 2025`;
+  const medalhas = estado.conquistasDesbloqueadas.map(i =>
+    `<span class="cert-medalha" title="${CONQUISTAS[i].nome}">${CONQUISTAS[i].icone}</span>`).join('');
+  document.getElementById('cert-medalhas').innerHTML = medalhas || '<span class="cert-medalha">🌈</span><span class="cert-medalha">🌍</span><span class="cert-medalha">💙</span>';
+  mostrarTela('tela-certificado');
+}
+
+function imprimirCertificado() { window.print(); }
+function voltarFinal() { mostrarTela('tela-final'); }
+
+function reiniciarJogo() {
+  estado = { nomeAluno: estado.nomeAluno, faseAtual:0, perguntaAtualNaFase:0, perguntaGlobal:0,
+    pontos:0, acertosNaFase:0, errosNaFase:0, pontosFase:0, acertosSeguidosAtual:0,
+    conquistasDesbloqueadas:[], primeiraResposta:true, temporizador:null, tempoRestante:20 };
+  mostrarTela('tela-inicio');
+}
+
+function desbloquearConquista(idx) {
+  if (estado.conquistasDesbloqueadas.includes(idx)) return;
+  estado.conquistasDesbloqueadas.push(idx);
+  const c = CONQUISTAS[idx];
+  const popup = document.getElementById('conquista-popup');
+  document.getElementById('conquista-icone').textContent = c.icone;
+  document.getElementById('conquista-nome').textContent = c.nome;
+  document.getElementById('conquista-desc').textContent = c.desc;
+  popup.classList.add('visivel');
+  setTimeout(() => popup.classList.remove('visivel'), 3000);
+}
+
+function lancarConfetes() {
+  const cores = ['#FF6B6B','#FFD93D','#6BCB77','#4D96FF','#C77DFF','#FF9A3C'];
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement('div');
+    c.className = 'confete';
+    const cor = cores[Math.floor(Math.random() * cores.length)];
+    const x = Math.random() * 100;
+    const delay = Math.random() * 3;
+    const dur = 2 + Math.random() * 2;
+    const size = 8 + Math.random() * 10;
+    c.style.cssText = `left:${x}%;top:-20px;background:${cor};width:${size}px;height:${size}px;animation-delay:${delay}s;animation-duration:${dur}s;border-radius:${Math.random() > 0.5 ? '50%':'2px'};`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), (delay + dur + 0.5) * 1000);
+  }
+}
+
+// Print styles
+const printStyle = document.createElement('style');
+printStyle.textContent = `@media print { body > *:not(#tela-certificado) { display: none !important; } #tela-certificado { display: flex !important; background: white !important; } .certificado { box-shadow: none !important; } .fundo-estrelas, .conquista-popup, .overlay-feedback, .faixas-top, .faixas-bottom { display: none !important; } }`;
+document.head.appendChild(printStyle);
+
+criarFundoAnimado();
+</script>
+</body>
+</html>
